@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.note.components.globalComponents.millistoDate
 import com.app.note.components.globalComponents.numtoTime
+import com.app.note.functions.FormatTime
 import com.app.note.repository.todoRepo
 import com.app.note.screens.addTodoScreen.addTodoScreenState
 import com.app.note.screens.updateTodoScreen.ui.channel.updateTodoScreenChannel
@@ -57,27 +58,31 @@ class updateTodoViewModel(
                     val todo = todos.firstOrNull() ?: return@collect
                 _state.update { it->
 
+                    val createdTimestamp = todo.createdTimestamp
+                    val deletedTimestamp =todo.deadlineTimeStamp
 
                     it.copy(
 
                         title = todo.title,
 
-//                        createdMinute = todo.createdTimeMinute,
-//                        createdHour = todo.createdTimeHour,
-//                        createdDateLong = todo.createdDate,
-//
-//                        deadlineMinute = todo.deadlineTimeMinute,
-//                        deadlineHour = todo.deadlineTimeHour,
-//                        deadlineDateLong = todo.deadlineDate,
-//
-//                        deadlineDateString = millistoDate(todo.deadlineDate),
-//                        createdDateString = millistoDate(todo.createdDate),
-//
-//                        createdTimeString = numtoTime(todo.createdTimeHour,
-//                            todo.createdTimeMinute),
-//
-//                        deadlineTimeString = numtoTime(todo.deadlineTimeHour,
-//                        todo.deadlineTimeMinute),
+                        createdMinute = createdTimestamp.minute,
+                        createdHour = createdTimestamp.hour,
+                        createdDateLong = createdTimestamp.toLocalDate().atStartOfDay(ZoneId.systemDefault())
+                            .toInstant().toEpochMilli(),
+
+                        deadlineMinute = deletedTimestamp?.minute,
+                        deadlineHour = deletedTimestamp?.hour,
+                        deadlineDateLong = createdTimestamp.toLocalDate().atStartOfDay(ZoneId.systemDefault())
+                            .toInstant().toEpochMilli(),
+
+                        deadlineDateString = FormatTime(deletedTimestamp),
+                        createdDateString = FormatTime(createdTimestamp),
+
+                        createdTimeString = numtoTime(todo.createdTimeHour,
+                            todo.createdTimeMinute),
+
+                        deadlineTimeString = numtoTime(todo.deadlineTimeHour,
+                        todo.deadlineTimeMinute),
                     )
 
                 }
