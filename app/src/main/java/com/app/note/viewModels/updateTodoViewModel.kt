@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.note.components.globalComponents.millistoDate
 import com.app.note.components.globalComponents.numtoTime
+import com.app.note.functions.FormatDate
 import com.app.note.functions.FormatTime
 import com.app.note.repository.todoRepo
 import com.app.note.screens.addTodoScreen.addTodoScreenState
@@ -75,14 +76,14 @@ class updateTodoViewModel(
                         deadlineDateLong = createdTimestamp.toLocalDate().atStartOfDay(ZoneId.systemDefault())
                             .toInstant().toEpochMilli(),
 
-                        deadlineDateString = FormatTime(deletedTimestamp),
-                        createdDateString = FormatTime(createdTimestamp),
+                        deadlineDateString = FormatDate(deletedTimestamp),
+                        createdDateString = FormatDate(createdTimestamp),
 
-                        createdTimeString = numtoTime(todo.createdTimeHour,
-                            todo.createdTimeMinute),
+                        createdTimeString = numtoTime(createdTimestamp.hour,
+                            createdTimestamp.minute),
 
-                        deadlineTimeString = numtoTime(todo.deadlineTimeHour,
-                        todo.deadlineTimeMinute),
+                        deadlineTimeString = numtoTime(deletedTimestamp?.hour,
+                        deletedTimestamp?.minute),
                     )
 
                 }
