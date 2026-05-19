@@ -83,12 +83,9 @@ fun trashScreen(paddingValues: PaddingValues, layoutDirection: LayoutDirection,
                     trashCard(
                         title = todo.title,
                         Id = todo.id,
-                        createdDate = todo.createdDate,
-                        createdHour = todo.createdTimeHour,
-                        createdMinute = todo.createdTimeMinute,
-                        deadlineDate = todo.deadlineDate,
-                        deadlineHour = todo.deadlineTimeHour,
-                        deadlineMinute = todo.createdTimeMinute,
+                        createdDate = todo.createdTimestamp,
+                        deadlineDate = todo.deadlineTimeStamp,
+
                         redirect = {
                             navToTrashDataScreen(todo.id)
                         },

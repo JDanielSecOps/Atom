@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app.note.components.globalComponents.millistoDate
 import com.app.note.components.globalComponents.numtoTime
+import com.app.note.functions.FormatTime
+import java.time.LocalDateTime
 
 
 @Composable
@@ -31,12 +33,8 @@ fun todoDetailsCard(
 
     Id : Int,
     title: String,
-    createdDate : Long,
-    createdHour : Int,
-    createdMinute : Int,
-    deadlineDate: Long?,
-    deadlineHour : Int?,
-    deadlineMinute : Int?,
+    createdDate : LocalDateTime,
+    deadlineDate: LocalDateTime?,
     note : String
 
 ){
@@ -61,14 +59,10 @@ fun todoDetailsCard(
                 Text("Title : ${title}", modifier = Modifier.fillMaxWidth()
                 )
 
-                Text("Created : ${millistoDate(createdDate)} " +
-                        numtoTime(createdHour,createdMinute)
-                )
+                Text("Created : ${FormatTime(createdDate)} ")
 
-                if(deadlineDate is Long && deadlineHour is Int && deadlineMinute is Int){
-                    Text("Deadline : ${millistoDate(createdDate)} " +
-                            numtoTime(createdHour,createdMinute)
-                    )
+                if(deadlineDate is LocalDateTime){
+                    Text("Deadline : ${FormatTime(deadlineDate)} ")
                 }
             }
         }

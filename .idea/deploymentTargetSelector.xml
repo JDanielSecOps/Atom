@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2026-01-11T18:52:55.652764009Z">
+        <DropdownSelection timestamp="2026-05-19T08:09:16.087329257Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/home/watcher/.android/avd/Small_Phone_2.avd" />

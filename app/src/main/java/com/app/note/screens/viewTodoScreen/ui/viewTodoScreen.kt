@@ -67,12 +67,8 @@ fun viewTodoScreen(paddingValues: PaddingValues
             todoDetailsCard(
                 Id = todo.id,
                 title = todo.title,
-                createdDate = todo.createdDate,
-                createdHour = todo.createdTimeHour,
-                createdMinute = todo.createdTimeMinute,
-                deadlineDate = todo.deadlineDate,
-                deadlineHour = todo.deadlineTimeHour,
-                deadlineMinute = todo.deadlineTimeMinute,
+                createdDate = todo.createdTimestamp,
+                deadlineDate = todo.deadlineTimeStamp,
                 note = todo.Todo
             )
         }

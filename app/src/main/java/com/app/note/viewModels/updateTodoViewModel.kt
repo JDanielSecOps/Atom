@@ -24,8 +24,10 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZoneOffset
 
 
@@ -60,22 +62,22 @@ class updateTodoViewModel(
 
                         title = todo.title,
 
-                        createdMinute = todo.createdTimeMinute,
-                        createdHour = todo.createdTimeHour,
-                        createdDateLong = todo.createdDate,
-
-                        deadlineMinute = todo.deadlineTimeMinute,
-                        deadlineHour = todo.deadlineTimeHour,
-                        deadlineDateLong = todo.deadlineDate,
-
-                        deadlineDateString = millistoDate(todo.deadlineDate),
-                        createdDateString = millistoDate(todo.createdDate),
-
-                        createdTimeString = numtoTime(todo.createdTimeHour,
-                            todo.createdTimeMinute),
-
-                        deadlineTimeString = numtoTime(todo.deadlineTimeHour,
-                        todo.deadlineTimeMinute),
+//                        createdMinute = todo.createdTimeMinute,
+//                        createdHour = todo.createdTimeHour,
+//                        createdDateLong = todo.createdDate,
+//
+//                        deadlineMinute = todo.deadlineTimeMinute,
+//                        deadlineHour = todo.deadlineTimeHour,
+//                        deadlineDateLong = todo.deadlineDate,
+//
+//                        deadlineDateString = millistoDate(todo.deadlineDate),
+//                        createdDateString = millistoDate(todo.createdDate),
+//
+//                        createdTimeString = numtoTime(todo.createdTimeHour,
+//                            todo.createdTimeMinute),
+//
+//                        deadlineTimeString = numtoTime(todo.deadlineTimeHour,
+//                        todo.deadlineTimeMinute),
                     )
 
                 }
@@ -95,8 +97,10 @@ class updateTodoViewModel(
                 val id                  =Id
                 val title               = state.value.title
                 val todo                = todofield_state.text.toString()
-                val createdDate         = state.value.createdDateLong
-                val deadlineDate        = state.value.deadlineDateLong
+                val createdDate         = Instant.ofEpochMilli(state.value.createdDateLong!!)
+                    .atZone(ZoneId.systemDefault()).toLocalDateTime()
+                val deadlineDate        = state.value.deadlineDateLong?.let { Instant.ofEpochMilli(it)
+                    .atZone(ZoneId.systemDefault()).toLocalDateTime()}
                 val createdTimeHour     = state.value.createdHour
                 val createdTimeMinute   = state.value.createdMinute
                 val deadlineTimeHour    = state.value.deadlineHour
@@ -121,13 +125,11 @@ class updateTodoViewModel(
                     id = id,
                     title = title,
                     Todo = todo,
-                    createdDate = createdDate!!,
-                    deadlineDate = deadlineDate,
+                    createdTimestamp = createdDate.withHour(createdTimeHour).withMinute(createdTimeMinute),
+                    deadlineTimeStamp = if(deadlineTimeMinute==null || deadlineTimeHour ==null){
+                        null
+                    }else{deadlineDate?.withHour(deadlineTimeHour)?.withMinute(deadlineTimeMinute)},
                     deleted = false,
-                    createdTimeHour = createdTimeHour,
-                    createdTimeMinute = createdTimeMinute,
-                    deadlineTimeHour = deadlineTimeHour,
-                    deadlineTimeMinute = deadlineTimeMinute
                 )
 
 

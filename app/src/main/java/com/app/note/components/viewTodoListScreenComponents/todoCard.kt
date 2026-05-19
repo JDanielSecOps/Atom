@@ -25,6 +25,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.app.note.components.globalComponents.millistoDate
 import com.app.note.components.globalComponents.numtoTime
+import com.app.note.functions.FormatTime
+import java.time.LocalDateTime
 
 
 @Composable
@@ -32,12 +34,8 @@ fun todoCard(
 
     Id : Int,
     title: String,
-    createdDate : Long,
-    createdHour : Int,
-    createdMinute : Int,
-    deadlineDate: Long?,
-    deadlineHour : Int?,
-    deadlineMinute : Int?,
+    createdDate : LocalDateTime,
+    deadlineDate: LocalDateTime?,
     redirect:(Int)-> Unit,
     update:()-> Unit,
     delete:()-> Unit
@@ -56,14 +54,10 @@ fun todoCard(
             Text("Title : ${title}", overflow = TextOverflow.Ellipsis, modifier = Modifier.fillMaxWidth(),
                 maxLines = 1)
 
-            Text("Created : ${millistoDate(createdDate)} " +
-                    numtoTime(createdHour,createdMinute)
-            )
+            Text("Created : ${FormatTime(createdDate)} ")
 
-            if(deadlineDate is Long && deadlineHour is Int && deadlineMinute is Int){
-                Text("Deadline : ${millistoDate(createdDate)} " +
-                        numtoTime(createdHour,createdMinute)
-                )
+            if(deadlineDate is LocalDateTime){
+                Text("Deadline : ${FormatTime(deadlineDate)} ")
             }
             Row(modifier = Modifier.align(Alignment.End)){
                 IconButton(

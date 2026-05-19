@@ -21,6 +21,8 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.Instant
+import java.time.ZoneId
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,8 +61,11 @@ class addTodoScreenViewModel(val todoRepo: todoRepo): ViewModel() {
 
                 val title               = state.value.title
                 val todo                = todofield_state.text.toString()
-                val createdDate         = state.value.createdDateLong
-                val deadlineDate        = state.value.deadlineDateLong
+                val createdDate         = Instant.ofEpochMilli(state.value.createdDateLong!!)
+                    .atZone(ZoneId.systemDefault()).toLocalDateTime()
+                val deadlineDate        = state.value.deadlineDateLong?.let { Instant.ofEpochMilli(it)
+                    .atZone(ZoneId.systemDefault()).toLocalDateTime()}
+
                 val createdTimeHour     = state.value.createdHour
                 val createdTimeMinute   = state.value.createdMinute
                 val deadlineTimeHour    = state.value.deadlineHour
@@ -84,13 +89,11 @@ class addTodoScreenViewModel(val todoRepo: todoRepo): ViewModel() {
                 val todoentry = TodoTable(
                     title = title,
                     Todo = todo,
-                    createdDate = createdDate!!,
-                    deadlineDate = deadlineDate,
+                    createdTimestamp = createdDate.withHour(createdTimeHour).withMinute(createdTimeMinute),
+                    deadlineTimeStamp = if(deadlineTimeMinute==null || deadlineTimeHour ==null){
+                        null
+                    }else{deadlineDate?.withHour(deadlineTimeHour)?.withMinute(deadlineTimeMinute)},
                     deleted = false,
-                    createdTimeHour = createdTimeHour,
-                    createdTimeMinute = createdTimeMinute,
-                    deadlineTimeHour = deadlineTimeHour,
-                    deadlineTimeMinute = deadlineTimeMinute
                 )
 
 
