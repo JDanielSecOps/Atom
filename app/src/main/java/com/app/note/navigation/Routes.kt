@@ -24,21 +24,21 @@ sealed interface Routes : NavKey{
         }
 
         @Serializable
-        data class seeTodo(val id : Int): Routes{
+        data class seeTodo(val id : String): Routes{
 
             @Serializable
-            data class seeTodoScreen(val id : Int) : Routes
+            data class seeTodoScreen(val id : String) : Routes
 
             @Serializable
-            data class updateTodo(val Id : Int) : Routes
+            data class updateTodo(val Id : String) : Routes
 
         }
 
         @Serializable
-        data class update(val id : Int): Routes{
+        data class update(val id : String): Routes{
 
             @Serializable
-            data class updateTodoDetails(val id : Int): Routes
+            data class updateTodoDetails(val id : String): Routes
 
             @Serializable
             data object updateNote : Routes
@@ -65,9 +65,13 @@ sealed interface Routes : NavKey{
             data object trashScreen : Routes
 
             @Serializable
-            data class seetrashDataScreen(val id : Int) : Routes
+            data class seetrashDataScreen(val id : String) : Routes
 
         }
+
+        @Serializable
+
+        data object BackupsScreen : Routes
 
     }
 }

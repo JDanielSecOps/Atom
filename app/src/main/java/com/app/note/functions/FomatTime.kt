@@ -11,7 +11,7 @@ fun FormatTime(timestamp : LocalDateTime?) : String?{
 
     if(timestamp != null){
 
-        val formatting = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm a", Locale.getDefault())
+        val formatting = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a", Locale.getDefault())
         return  timestamp.format(formatting)
 
     }

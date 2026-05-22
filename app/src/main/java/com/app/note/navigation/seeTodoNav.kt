@@ -6,8 +6,6 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import com.app.note.screens.settingsScreen.ui.settingsScreenRoot
-import com.app.note.screens.themesScreen.ui.themesScreenRoot
 import com.app.note.screens.viewTodoScreen.ui.viewTodoScreenRoot
 import com.app.note.viewModels.viewTodoScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -16,7 +14,7 @@ import org.koin.core.parameter.parametersOf
 
 @Composable
 fun seeTodoNav(
-    Id : Int,
+    Id : String,
     navTodoListScreen : ()-> Unit
 ){
 

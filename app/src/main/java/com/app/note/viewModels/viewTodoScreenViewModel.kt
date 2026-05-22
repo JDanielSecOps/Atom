@@ -9,16 +9,16 @@ import com.app.note.source.roomDatabase.TodoTable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class viewTodoScreenViewModel(
-    val id : Int,
+    val id : String,
     val todoRepo: todoRepo,
 ) : ViewModel() {
 
-    val _state = MutableStateFlow(viewTodoScreenState())
+
+    private val _state = MutableStateFlow(viewTodoScreenState())
 
 
     val todo =todoRepo.getTodoesById(id)

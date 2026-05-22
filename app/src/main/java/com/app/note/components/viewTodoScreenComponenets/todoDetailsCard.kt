@@ -3,7 +3,6 @@
 package com.app.note.components.viewTodoListScreenComponents
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,19 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.app.note.components.globalComponents.millistoDate
-import com.app.note.components.globalComponents.numtoTime
 import com.app.note.functions.FormatTime
 import java.time.LocalDateTime
 
@@ -31,11 +25,11 @@ import java.time.LocalDateTime
 @Composable
 fun todoDetailsCard(
 
-    Id : Int,
+    Id: String,
     title: String,
-    createdDate : LocalDateTime,
+    createdDate: LocalDateTime,
     deadlineDate: LocalDateTime?,
-    note : String
+    note: String
 
 ){
 

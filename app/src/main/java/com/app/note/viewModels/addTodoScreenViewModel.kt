@@ -5,8 +5,8 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.note.components.globalComponents.millistoDate
-import com.app.note.components.globalComponents.numtoTime
+import com.app.note.functions.millistoDate
+import com.app.note.functions.numtoTime
 import com.app.note.repository.todoRepo
 import com.app.note.screens.addTodoScreen.addTodoScreenIntent
 import com.app.note.screens.addTodoScreen.addTodoScreenState

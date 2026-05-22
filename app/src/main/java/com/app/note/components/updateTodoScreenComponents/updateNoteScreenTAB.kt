@@ -32,7 +32,7 @@ fun updateNoteTAB(
         title = { Text("Note") },
         actions = {
             IconButton(onClick ={navToHomeScreen()}) {
-                Icon(Icons.Filled.Edit,null)
+                Icon(Icons.Filled.Check,null)
             }
         }
     )

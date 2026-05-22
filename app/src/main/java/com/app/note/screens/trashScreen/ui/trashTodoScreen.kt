@@ -2,6 +2,7 @@ package com.app.note.screens.trashScreen.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,20 +20,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.app.note.components.globalComponents.Sorter
 import com.app.note.components.globalComponents.generalScreenScaffoldPadding
 import com.app.note.components.trashScreenComponenets.trashCard
 import com.app.note.components.trashScreenComponenets.trashScreenTopAppBar
-import com.app.note.components.viewTodoListScreenComponents.todoCard
 import com.app.note.screens.trashScreen.trashScreenIntent
 import com.app.note.screens.trashScreen.trashScreenState
 import com.app.note.viewModels.trashScreenViewModel
-import com.app.note.viewModels.viewTodoScreenViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 
 @Composable
 fun trashScreenRoot(
-    navToTrashDataScreen : (Int)-> Unit,
+    navToTrashDataScreen : (String)-> Unit,
     navToSettings : ()->Unit,
     viewModel: trashScreenViewModel = koinViewModel<trashScreenViewModel>()
 ){
@@ -58,7 +58,7 @@ fun trashScreenRoot(
 fun trashScreen(paddingValues: PaddingValues, layoutDirection: LayoutDirection,
                 state : trashScreenState
                 , onAction : (trashScreenIntent) -> Unit,
-                navToTrashDataScreen : (Int)-> Unit,){
+                navToTrashDataScreen : (String)-> Unit,){
 
     if(state.deleteList.isEmpty()){
 
@@ -71,9 +71,13 @@ fun trashScreen(paddingValues: PaddingValues, layoutDirection: LayoutDirection,
 
     }else{
 
-
-        Box(modifier = generalScreenScaffoldPadding(paddingValues,layoutDirection).fillMaxSize()
+       Column(modifier = generalScreenScaffoldPadding(paddingValues,layoutDirection).fillMaxSize()
         ){
+
+           Sorter(
+               sortingFn = {it ->
+                   onAction(trashScreenIntent.sorting(it))}
+           )
 
             LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)

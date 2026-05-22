@@ -2,6 +2,7 @@ package com.app.note.screens.todoListScreen.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.app.note.components.globalComponents.Sorter
 import com.app.note.components.globalComponents.generalScreenScaffoldPadding
 import com.app.note.components.todoListScreenComponents.addTodo
 import com.app.note.components.todoListScreenComponents.todolistScreenTopAppBar
@@ -32,9 +34,9 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun todolistScreenRoot(
-    navToAddTodo : () -> Unit ,
-    navtoseeTodo: (Int)-> Unit,
-    navtoUpdateTodo :(Int)-> Unit,
+    navToAddTodo : () -> Unit,
+    navtoseeTodo: (String)-> Unit,
+    navtoUpdateTodo :(String)-> Unit,
     viewmodel: todoListScreenViewmodel = koinViewModel<todoListScreenViewmodel>()
 ){
 
@@ -57,11 +59,11 @@ fun todolistScreenRoot(
 
 @Composable
 fun todolistScreen(paddingValues: PaddingValues,
-   layoutDirection: LayoutDirection,
-   state: todoListScreenState,
-   navtoseeTodo: (Int)-> Unit,
-   onAction : (todoListScreenIntent) ->Unit,
-   navtoUpdateTodo :(Int)-> Unit
+                   layoutDirection: LayoutDirection,
+                   state: todoListScreenState,
+                   navtoseeTodo: (String)-> Unit,
+                   onAction : (todoListScreenIntent) ->Unit,
+                   navtoUpdateTodo :(String)-> Unit
 ){
 
 
@@ -84,8 +86,11 @@ fun todolistScreen(paddingValues: PaddingValues,
 
     }else {
 
-        Box(modifier = generalScreenScaffoldPadding(paddingValues, layoutDirection).fillMaxSize()) {
-
+        Column(modifier = generalScreenScaffoldPadding(paddingValues, layoutDirection).fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Sorter(sortingFn ={sortType ->
+                    onAction(todoListScreenIntent.sort(sortType))
+            })
             LazyColumn(
                 modifier = Modifier.fillMaxSize().padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)

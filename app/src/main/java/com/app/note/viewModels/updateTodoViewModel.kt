@@ -3,39 +3,29 @@ package com.app.note.viewModels
 import android.util.Log
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.setTextAndPlaceCursorAtEnd
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.note.components.globalComponents.millistoDate
-import com.app.note.components.globalComponents.numtoTime
+import com.app.note.functions.millistoDate
+import com.app.note.functions.numtoTime
 import com.app.note.functions.FormatDate
-import com.app.note.functions.FormatTime
 import com.app.note.repository.todoRepo
-import com.app.note.screens.addTodoScreen.addTodoScreenState
 import com.app.note.screens.updateTodoScreen.ui.channel.updateTodoScreenChannel
 import com.app.note.screens.updateTodoScreen.ui.updateTodoScreenIntent
 import com.app.note.screens.updateTodoScreen.ui.updateTodoScreenState
 import com.app.note.source.roomDatabase.TodoTable
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.Instant
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.ZoneId
-import java.time.ZoneOffset
-
 
 
 class updateTodoViewModel(
-    val Id : Int,
+    val Id : String,
     val todoRepo: todoRepo): ViewModel() {
 
     val todofield_state = TextFieldState()

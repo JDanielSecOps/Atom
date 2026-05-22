@@ -9,8 +9,21 @@ class todoRepo(val todoDatabase: todoDatabase) {
     private val todoDatabseInstance =todoDatabase.todoDao()
 
     val allTodos: Flow<List<TodoTable>> =todoDatabseInstance.getAllTodo(false)
+
+    val allData : Flow<List<TodoTable>> = todoDatabseInstance.getAllData()
+    val created_ascending : Flow<List<TodoTable>> =todoDatabseInstance.todoSortedByCreatedAscending(false)
+    val created_descending : Flow<List<TodoTable>> =todoDatabseInstance.todoSortedByCreatedDecending(false)
+    val deadline_ascending : Flow<List<TodoTable>> =todoDatabseInstance.todoSortedByDeadlineAscending(false)
+    val deadline_descending : Flow<List<TodoTable>> =todoDatabseInstance.todoSortedByDeadlineDecending(false)
+
+    val deleated_created_ascending : Flow<List<TodoTable>> =todoDatabseInstance.todoSortedByCreatedAscending(true)
+    val deleated_created_descending : Flow<List<TodoTable>> =todoDatabseInstance.todoSortedByCreatedDecending(true)
+    val deleated_deadline_ascending : Flow<List<TodoTable>> =todoDatabseInstance.todoSortedByDeadlineAscending(true)
+    val deleated_deadline_descending : Flow<List<TodoTable>> =todoDatabseInstance.todoSortedByDeadlineDecending(true)
+
+
     val getdeletionListOFTodos : Flow<List<TodoTable>> =todoDatabseInstance.getAllDeleted(true)
-    fun getTodoesById(id : Int) : Flow<List<TodoTable>> =todoDatabseInstance.getTodobyId(id)
+    fun getTodoesById(id: String) : Flow<List<TodoTable>> =todoDatabseInstance.getTodobyId(id)
 
     suspend fun deleteTodo(todo : TodoTable){
         todoDatabseInstance.deleteTodo(todo)
@@ -24,7 +37,11 @@ class todoRepo(val todoDatabase: todoDatabase) {
         todoDatabseInstance.insertTodo(todo)
     }
 
-    suspend fun updateTempDeleteStatus(id : Int , status : Boolean){
+    suspend fun insertAllTodo(todo : List<TodoTable>){
+        todoDatabseInstance.insertAllTodo(todo)
+    }
+
+    suspend fun updateTempDeleteStatus(id: String, status: Boolean){
         todoDatabseInstance.updateTempDeleteStatus(id,status)
     }
 

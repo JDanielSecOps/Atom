@@ -12,9 +12,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app.note.components.globalComponents.generalScreenScaffoldPadding
 import com.app.note.components.viewTodoListScreenComponents.todoDetailsCard
-import com.app.note.components.viewTodoListScreenComponents.viewTodoListScreenTAB
 import com.app.note.components.viewTrashDataScreenComponents.viewTrashDataScreenTAB
-import com.app.note.screens.trashScreen.ui.trashScreenRoot
 import com.app.note.screens.viewTodoScreen.viewTodoScreenIntent
 
 import com.app.note.screens.viewTodoScreen.viewTodoScreenState

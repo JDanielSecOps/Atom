@@ -6,6 +6,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import com.app.note.screens.backupsScreen.ui.backupsScreenRoot
 import com.app.note.screens.settingsScreen.ui.settingsScreenRoot
 import com.app.note.screens.themesScreen.ui.themesScreenRoot
 import com.app.note.screens.trashScreen.ui.trashScreenRoot
@@ -38,6 +39,9 @@ fun setttingsNav(
                         },
                         navToTrash={
                             settingsNavBackstack.add(Routes.Settings.trash)
+                        },
+                        navToBackup = {
+                            settingsNavBackstack.add(Routes.Settings.BackupsScreen)
                         }
                     )
 
@@ -51,6 +55,15 @@ fun setttingsNav(
                     })
 
                 }
+                entry<Routes.Settings.BackupsScreen>{
+                    backupsScreenRoot(
+                        navToSetting = {
+                            if(settingsNavBackstack.size>1){
+                                settingsNavBackstack.removeLastOrNull()
+                            }
+                        }
+                    )
+                }
                 entry<Routes.Settings.trash>{
                     trashNav(
                         navToSettings = {
@@ -60,6 +73,7 @@ fun setttingsNav(
                         }
                     )
                 }
+
             }
         )
         

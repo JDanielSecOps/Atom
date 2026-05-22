@@ -6,10 +6,12 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
+import com.app.note.repository.fileOperations
 import com.app.note.repository.settingsDataStore
 import com.app.note.repository.todoRepo
 import com.app.note.source.roomDatabase.todoDatabase
 import com.app.note.viewModels.addTodoScreenViewModel
+import com.app.note.viewModels.backupsScreenViewmodel
 import com.app.note.viewModels.themesScreenViewModel
 import com.app.note.viewModels.todoListScreenViewmodel
 import com.app.note.viewModels.trashScreenViewModel
@@ -32,10 +34,11 @@ val appModule = module {
     single {
 
         Room.databaseBuilder(
-            context = androidApplication(),
-            name = "todoDatabase",
-            klass = todoDatabase::class.java
-        ).build()
+                context = androidApplication(),
+                name = "todoDatabase",
+                klass = todoDatabase::class.java
+            ).fallbackToDestructiveMigration(true)
+            .build()
 
     }
 
@@ -46,6 +49,10 @@ val appModule = module {
 
     single {
         todoRepo(get())
+    }
+
+    single {
+        fileOperations(androidApplication(),get())
     }
 
     viewModel {
@@ -73,5 +80,9 @@ val appModule = module {
 
     viewModel {
         themesScreenViewModel(get())
+    }
+
+    viewModel {
+        backupsScreenViewmodel(get())
     }
 }

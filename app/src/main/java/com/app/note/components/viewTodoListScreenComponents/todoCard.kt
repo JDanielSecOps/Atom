@@ -11,9 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.EditNote
-import androidx.compose.material.icons.filled.RestoreFromTrash
-import androidx.compose.material.icons.filled.Update
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -23,8 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.app.note.components.globalComponents.millistoDate
-import com.app.note.components.globalComponents.numtoTime
 import com.app.note.functions.FormatTime
 import java.time.LocalDateTime
 
@@ -32,13 +27,13 @@ import java.time.LocalDateTime
 @Composable
 fun todoCard(
 
-    Id : Int,
+    Id: String,
     title: String,
-    createdDate : LocalDateTime,
+    createdDate: LocalDateTime,
     deadlineDate: LocalDateTime?,
-    redirect:(Int)-> Unit,
-    update:()-> Unit,
-    delete:()-> Unit
+    redirect: (String) -> Unit,
+    update: () -> Unit,
+    delete: () -> Unit
 ){
     Column(Modifier.fillMaxWidth().border(2.dp,
         MaterialTheme.colorScheme.primary,

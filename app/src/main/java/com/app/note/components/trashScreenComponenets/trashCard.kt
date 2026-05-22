@@ -3,7 +3,6 @@ package com.app.note.components.trashScreenComponenets
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.RestoreFromTrash
-import androidx.compose.material.icons.filled.Update
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.ui.Alignment
@@ -21,23 +20,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.app.note.components.globalComponents.millistoDate
-import com.app.note.components.globalComponents.numtoTime
 import com.app.note.functions.FormatTime
-import com.app.note.source.roomDatabase.TodoTable
 import java.time.LocalDateTime
 
 
 @Composable
 fun trashCard(
 
-    Id : Int,
+    Id: String,
     title: String,
-    createdDate : LocalDateTime,
+    createdDate: LocalDateTime,
     deadlineDate: LocalDateTime?,
-    redirect : (Int)->Unit,
-    delete:()->Unit,
-    restore:()-> Unit
+    redirect: (String) -> Unit,
+    delete: () -> Unit,
+    restore: () -> Unit
 ){
     Column(Modifier.fillMaxWidth().border(2.dp,
         MaterialTheme.colorScheme.primary,

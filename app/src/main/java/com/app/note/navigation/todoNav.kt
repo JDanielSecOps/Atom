@@ -8,10 +8,6 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 
 import com.app.note.screens.todoListScreen.ui.todolistScreenRoot
-import com.app.note.screens.viewTodoScreen.ui.viewTodoScreenRoot
-import com.app.note.viewModels.viewTodoScreenViewModel
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun todoNav(

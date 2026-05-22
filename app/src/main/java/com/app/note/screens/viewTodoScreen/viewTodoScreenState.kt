@@ -8,5 +8,5 @@ data class viewTodoScreenState(
 
     val todoList : List<TodoTable> =emptyList<TodoTable>(),
     val title : String="",
-    val id : Int =0
+    val id : String =""
 )
