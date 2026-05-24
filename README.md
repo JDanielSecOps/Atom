@@ -12,7 +12,7 @@
 <a href="#tech-stack">Tech Stack</a>\
 <a href="#ui">UI</a>\
 <a href="#installation">Installation</a>\
-<a href="#contribution">Contribution</a>
+<a href="#contributions">Contribution</a>
 
 
 ## Details
