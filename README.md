@@ -23,6 +23,7 @@ compose
 ## Tech Stack
  
 Database : Room\
+functionality : Kotlin
 UI : Jetpack Compose 
 
 ## Content
